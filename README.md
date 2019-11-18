@@ -1,2 +1,2 @@
-# Notes on different topics during pentest/ctf/hackerplay etc.
+# Notes on different topics during pentest/ctf/wargames etc.
 
