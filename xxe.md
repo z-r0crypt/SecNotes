@@ -223,7 +223,7 @@ action=write&contents=<?xml version="1.0" encoding="utf-8"?>
 ## fuzz
  - xmlfuzz
 
-## moar tricks
+## more tricks
  - http://www.pwntester.com/blog/2013/11/28/abusing-jar-downloads/
  - https://blog.netspi.com/forcing-xxe-reflection-server-error-messages/
  - https://twitter.com/Agarri_FR/status/595598007996919808 "Use `%payload;://xxx` as the final URL for inline leak via error messages (Java, at least)" "I used that trick last week: dynamic DTD w/o OOB leak (very uncommon), no data outside of attributes, verbose Java parser"
