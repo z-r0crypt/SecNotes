@@ -1,21 +1,26 @@
 # XML External Entity attacks
 
 # tools
-https://github.com/ssexxe/XXEBugFind # works on compilded java code
-https://github.com/BuffaloWill/oxml_xxe #docs, xlsx, pptx, odt, svg ...
-otori
++	https://github.com/ssexxe/XXEBugFind # works on compilded java code
++	https://github.com/BuffaloWill/oxml_xxe #docs, xlsx, pptx, odt, svg ...
++	otori
++	https://blog.gdssecurity.com/labs/2015/4/29/automated-data-exfiltration-with-xxe.html
++	https://github.com/joernchen/xxeserve
+
 
 # links
-http://www.vsecurity.com/download/papers/XMLDTDEntityAttacks.pdf (Must Read)
-https://media.blackhat.com/eu-13/briefings/Osipov/bh-eu-13-XML-data-osipov-slides.pdf
-https://www.youtube.com/watch?v=eBm0YhBrT_c
-http://lab.onsec.ru/2014/06/xxe-oob-exploitation-at-java-17.html
-http://2013.appsecusa.org/2013/wp-content/uploads/2013/12/WhatYouDidntKnowAboutXXEAttacks.pdf
-http://www.nosuchcon.org/talks/2013/D3_03_Alex&Timur_XML_Out_Of_Band.pdf
-http://christian-schneider.net/GenericXxeDetection.html#main
-http://blog.gdssecurity.com/labs/2015/4/29/automated-data-exfiltration-with-xxe.html
-https://www.owasp.org/index.php/XML_External_Entity_%28XXE%29_Processing
-http://phpsecurity.readthedocs.org/en/latest/Injection-Attacks.html#xml-injection
++	http://www.vsecurity.com/download/papers/XMLDTDEntityAttacks.pdf (Must Read)
++	https://media.blackhat.com/eu-13/briefings/Osipov/bh-eu-13-XML-data-osipov-slides.pdf
++	https://www.youtube.com/watch?v=eBm0YhBrT_c
++	http://lab.onsec.ru/2014/06/xxe-oob-exploitation-at-java-17.html
++	http://2013.appsecusa.org/2013/wp-content/uploads/2013/12/WhatYouDidntKnowAboutXXEAttacks.pdf
++	http://www.nosuchcon.org/talks/2013/D3_03_Alex&Timur_XML_Out_Of_Band.pdf
++	http://christian-schneider.net/GenericXxeDetection.html#main
++	http://blog.gdssecurity.com/labs/2015/4/29/automated-data-exfiltration-with-xxe.html
++	https://www.owasp.org/index.php/XML_External_Entity_%28XXE%29_Processing
++	http://phpsecurity.readthedocs.org/en/latest/Injection-Attacks.html#xml-injection
++	https://www.sans.org/blog/exploiting-xxe-vulnerabilities-in-iis-net
++ https://www.youtube.com/watch?v=p8wbebEgtDk
 
 - directories can be listed using "file://MY_DIR/"
 - valid XML files in ASCII or UTF-8 format can be read using "file://MY_DIR/MY_FILE"
@@ -27,7 +32,8 @@ http://phpsecurity.readthedocs.org/en/latest/Injection-Attacks.html#xml-injectio
 - relay attacks to other hosts
 
 # cheat sheet
-http://web-in-security.blogspot.com.au/2016/03/xxe-cheat-sheet.html
+* http://web-in-security.blogspot.com.au/2016/03/xxe-cheat-sheet.html
+* http://www.securityidiots.com/Web-Pentest/XXE/XXE-Cheat-Sheet-by-SecurityIdiots.html
 
 # validate xml
 http://www.xmlvalidation.com/index.php
@@ -52,7 +58,7 @@ http://framework.zend.com/security/advisory/ZF2012-01
 
 # upload
 * gopher
-useful because java doesn't support http://login:pass@host but ok for ftp://
+   - useful because java doesn't support http://login:pass@host but ok for ftp://
 
 * jar
 jar:http://x.x.x.x/blah.jar!/mypkg/lol.class
@@ -206,3 +212,5 @@ https://blog.netspi.com/forcing-xxe-reflection-server-error-messages/
 https://twitter.com/Agarri_FR/status/595598007996919808 "Use %payload;://xxx as the final URL for inline leak via error messages (Java, at least)" "I used that trick last week: dynamic DTD w/o OOB leak (very uncommon), no data outside of attributes, verbose Java parser"
 https://twitter.com/Agarri_FR/status/659182619796574209 "Under Java, FileInputStream will refuse to open "/" and "file:/" (they are directories). But "netdoc:/" is OK"
 file:///proc/self/cwd/../config/ # Java
+https://www.synack.com/blog/a-deep-dive-into-xxe-injection/
+https://mikeknoop.com/lxml-xxe-exploit/
