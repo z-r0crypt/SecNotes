@@ -4,3 +4,50 @@
 $ echo /etc/shadow > /tmp/lol; chmod +x /tmp/lol
 $ sudo tcpdump -ln -i em1 -w /tmp/blah.cap -c 100 -G 1 -z /tmp/lol
 
+tcpdump -i eth1 ‘tcp[13] = 0x2'
+tcpdump -i eth1 ‘tcp[13] = 0x12'
+
+$ sudo tcpdump -tlni eth1 -n icmp
+$ sudo tcpdump -i eth1 -c1 -n -s0 -vvvv icmp
+tcpdump -tlni em0 
+# listen for ICMP traffic on em0 network interface
+tcpdump -tlni em0 -n icmp
+# capture one ICMP packet and decode it
+tcpdump -i nfe0 -c1 -n -s0 -vvvv icmp
+sudo tcpdump -i eth1 -c1 -n -s0 -vvvv icmp -w temp.pcap
+
+C:\Program Files\Wireshark>dumpcap -D
+C:\Program Files\Wireshark>dumpcap -i 9
+C:\Program Files\Wireshark>dumpcap -i 12 -w C:\Users\verona\Downloads\testtrace.pcapng -b filesize:2000
+
+#HTTP Headers
+tcpdump -vvvs 1024 -l -A host yahoo.com
+
+#Show OSPF protocol traffic on the interface:
+tcpdump -i eth-s1p1c0 proto ospf
+#Show Telnet traffic on the interface:
+tcpdump -i eth-s1p1c0 port telnet
+tcpudmp -i eth-s1p1c0 port 23
+tcpdump -i eth-s2p1c0 udp port 68 
+#Show all traffic on the interface except port 80:
+tcpdump -i eth-s1p1c0 not port 80
+#Show traffic only from specific host:
+tcpdump -i eth-s1p1c0 host 192.168.10.24
+#Show additional information about each packet:
+tcpdump -vv -i eth-s1p1c0
+#Limit the size (in bytes) of captured packets 
+tcpdump -s 320 -i eth-s1p1c0
+
+#Saving a TCP dump in a .pcap file
+tcpdump -w capture.pcap -i eth-s1p2c0 host 10.1.1.1 and host 20.2.2.2
+tcpdump -nni any host 10.1.1.1 -w capture.pcap
+tcpdump -nni any host 10.1.1.1 and host 20.2.2.2 -w capture.pcap
+tcpdump -s 1500 -i eth-s1p1c0 -w /var/log/tcpdump_s1p1c0.cap
+
+#Saving a TCP dump in a .pcap file
+tcpdump -w capture.pcap -i eth-s1p2c0 host 10.1.1.1 and host 20.2.2.2
+tcpdump -nni any host 10.1.1.1 -w capture.pcap
+tcpdump -nni any host 10.1.1.1 and host 20.2.2.2 -w capture.pcap
+tcpdump -s 1500 -i eth-s1p1c0 -w /var/log/tcpdump_s1p1c0.cap
+
+
